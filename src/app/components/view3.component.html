@@ -1,0 +1,51 @@
+<div class="row mt-3">
+    <div class="col d-flex justify-content-between align-items-center">
+        <h5>News from {{ code }}</h5>
+
+        <button type="button" class="btn btn-info btn-sm" [routerLink]="['/view1']">
+            Back
+        </button>
+        
+    </div>
+</div>
+<div *ngFor="let n of articleResults, let i = index">
+    <div class="row">
+        <div class="col">
+            <img [src]="n.image" style="width: 100%;" alt="">
+        </div>
+        <div class="col">
+            <div>
+               {{ n.title }}
+            </div>
+            <div>
+               <small> {{ n.description }}</small>
+            </div>
+            <div>
+               <small> {{ n.source }}</small>
+            </div>
+            <div>
+               <small> {{ n.author }}</small>
+            </div>
+            <div>
+               <small> {{ n.pubTime }}</small>
+            </div>
+        </div>
+    </div>
+    <div>
+        {{ n.content }} &nbsp;&nbsp;&nbsp;&nbsp; <a [href]="n.url" target="_blank"><small>Read More</small></a>
+    </div>
+    <hr>
+ </div>
+
+       
+ <!-- <small>{{ n.author }}</small> -->
+    
+    <!-- 
+    
+    {{ n.url }}
+    {{ n.source }}
+     -->
+
+
+<!-- <h5>{{ n.title }}</h5> -->
+    <!-- <img [src]="n.image" alt=""> -->

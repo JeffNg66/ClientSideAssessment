@@ -1,0 +1,23 @@
+<h3>Settings</h3>
+
+<form [formGroup]="form">
+    <div class="form-group">
+        <label for="search">NewsAPI.org</label>
+        <input type="text" placeholder="API from newsapi.org" class="form-control" formControlName="akey">
+        <label for="search">Please enter the API key from newsapi.org</label>
+    </div>
+
+    <div class="row mt-3 mb-3">
+        <div class="col d-flex justify-content-start align-items-center">
+            <button type="button" class="btn btn-info btn-sm" [routerLink]="['/view1']">Back</button>
+        </div>
+        <div class="col d-flex justify-content-end align-items-center">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-success" [disabled]="form.invalid" (click)="delkey()">Delete</button>
+                <button type="button" class="btn btn-danger" [disabled]="form.invalid"
+                    (click)="addkey()">Add</button>
+            </div>
+
+        </div>
+    </div>
+</form>
