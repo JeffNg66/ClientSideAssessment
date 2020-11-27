@@ -22,7 +22,7 @@ export class View3Component implements OnInit {
   ngOnInit(): void {
     this.code = this.activatedRoute.snapshot.params['code']
     const url = `http://newsapi.org/v2/top-headlines/`
-    const headers = 'b66ccfb3ca484c7da4fffe2695578336'
+    const headers = ''
     let params = (new HttpParams()).set('country', this.code).set('apiKey',headers)
     this.http.get<any>(url, {params: params}).toPromise()
       .then(resp => {
@@ -39,8 +39,8 @@ export class View3Component implements OnInit {
             image: r.urlToImage,
             pubTime: r.publishedAt,
             content: r.content,
-            // cacheTime:  Date;
-            // saved: boolean;
+            // cacheTime:  new Date(),
+            // saved: boolean,
           } as NewsArticle
         })
         console.info(this.articleResults)

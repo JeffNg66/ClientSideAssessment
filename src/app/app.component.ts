@@ -19,13 +19,16 @@ export class AppComponent implements OnInit {
     // search apikey from database
     // if exist goes to View 1 else View 2
     this.apidb.checkContent()
-      .then(res => { this.check = res})
-    console.info('checkContent', this.check)
-    if (this.check) {
-      this.router.navigate(['/view1'])
-    } else {
-      this.router.navigate(['/view2'])
-    } 
+      .then(res => { 
+        // console.info('check: res  ',res)
+        this.check = res
+        // console.info('checkContent', this.check)
+        if (this.check) {
+          this.router.navigate(['/view1'])
+        } else {
+          this.router.navigate(['/view2'])
+        } 
+      })
   }
 
   // gotoView2() {
