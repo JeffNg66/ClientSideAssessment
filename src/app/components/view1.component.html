@@ -13,7 +13,7 @@
 <!-- <p>{{!emptylist ? "click on the list below for the search details" : "click on Search button to start" }} </p> -->
 <ul class="list-group mt-3">
     <a *ngFor="let s of resultList"
-        [routerLink]="['/view3', s.code]"
+        [routerLink]="['/view3', s.code, s.country]"
         class="list-group-item list-group-item-action"
     >{{ s.country }} &nbsp;&nbsp;&nbsp;&nbsp; <img [src]="s.flag" style="width: 30px;" alt="">
     </a>

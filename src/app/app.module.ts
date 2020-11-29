@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { apikeyDB } from './apikey.db';
+import { newsappDB } from './newsapp.db';
 import { View1Component } from './components/view1.component';
 import { View2Component } from './components/view2.component';
 import { View3Component } from './components/view3.component';
@@ -15,7 +15,7 @@ const ROUTES: Routes = [
   { path: '', component: AppComponent },
   { path: 'view1', component: View1Component },
   { path: 'view2', component: View2Component },
-  { path: 'view3/:code', component: View3Component },
+  { path: 'view3/:code/:country', component: View3Component },
   // { path: 'search/:genre/:q', component: ResultComponent},
   { path: '**', redirectTo: '/', pathMatch: 'full' }  // match the whole path not just routes
 ]
@@ -35,7 +35,7 @@ const ROUTES: Routes = [
   // HttpClient,
   ],
   providers: [
-              apikeyDB,
+              newsappDB,
             ],
   bootstrap: [AppComponent]
 })

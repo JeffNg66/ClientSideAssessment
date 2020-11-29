@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 
 import { NewsArticle } from '../model';
-import { apikeyDB } from './../apikey.db';
+import { newsappDB } from './../newsapp.db';
 
 @Component({
   selector: 'app-view3',
@@ -13,15 +13,17 @@ import { apikeyDB } from './../apikey.db';
 export class View3Component implements OnInit {
 
   code = ''
+  country = ''
   articleResults: NewsArticle[] = []
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private http: HttpClient, private qDB: apikeyDB,
+    private http: HttpClient, private qDB: newsappDB,
   ) { }
 
   ngOnInit(): void {
     this.code = this.activatedRoute.snapshot.params['code']
+    this.country = this.activatedRoute.snapshot.params['country']
     const url = `http://newsapi.org/v2/top-headlines/`
     this.qDB.getApiKey('newsapi.org').then(res => {
       const params = (new HttpParams()).set('country', this.code)

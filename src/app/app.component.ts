@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { apikeyDB } from './apikey.db';
+import { newsappDB } from './newsapp.db';
 
 @Component({
   selector: 'app-root',
@@ -11,19 +11,14 @@ import { apikeyDB } from './apikey.db';
 export class AppComponent implements OnInit {
   title = 'newsapi';
 
-  check = 0;
-
-  constructor(private router: Router, private apidb: apikeyDB) { }
+  constructor(private router: Router, private apidb: newsappDB) { }
 
   ngOnInit(): void {
     // search apikey from database
     // if exist goes to View 1 else View 2
     this.apidb.checkContent()
       .then(res => { 
-        // console.info('check: res  ',res)
-        this.check = res
-        // console.info('checkContent', this.check)
-        if (this.check) {
+        if (!!res) {
           this.router.navigate(['/view1'])
         } else {
           this.router.navigate(['/view2'])

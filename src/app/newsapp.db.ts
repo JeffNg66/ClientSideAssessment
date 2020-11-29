@@ -5,7 +5,7 @@ import { ApiKey, CountryList, NewsArticle } from './model';
 @Injectable({
     providedIn: 'root'
 })
-export class apikeyDB extends Dexie {
+export class newsappDB extends Dexie {
 
     private apiKey: Dexie.Table<ApiKey, string>
     private countries: Dexie.Table<CountryList, string>
@@ -13,7 +13,7 @@ export class apikeyDB extends Dexie {
 
     constructor() {
 
-        super('APIKEY')
+        super('NEWSAPI')
 
         this.version(1).stores({
             apiKey: 'id',
@@ -27,7 +27,6 @@ export class apikeyDB extends Dexie {
     }
 
     saveApi(id: string, apikey: string): Promise<any> {
-        console.info('in DB  :', apikey)
         return this.apiKey.add( {id, apikey} )
     }
 
@@ -38,24 +37,32 @@ export class apikeyDB extends Dexie {
             return ''
         })
     }
-    // async getApiKey(key: number): Promise<ApiKey> {
-    //     return await this.apiKey.get(key)
-    // }
 
     deleteApiKey(id: string): Promise<void> {
         return this.apiKey.delete(id)
     }
 
     checkContent(): Promise<any> {
-        // const have = await this.apiKey.count()
-        // if (have > 0) {
-        //     console.info('count > 0')
-        //     return have
-        // } else {
-        //     console.info('count < 0')
-        //     return ('no')
-        // }
         return this.apiKey.count()
+    }
+
+    saveCountryList(list: CountryList[]): Promise<any> {
+        // console.info('befor DB bulkput   ',list)
+        return this.countries.bulkPut(list)
+    }
+
+    getCountryList(): Promise<CountryList[]> {
+        return this.countries.toArray()
+    }
+
+    getCountry(code: string): Promise<CountryList> {
+        return this.countries.where('code').equalsIgnoreCase(code)
+            .toArray()
+            .then(result => {
+                if (result.length > 0)
+                    return result[0]
+                return null
+            })
     }
 
 }

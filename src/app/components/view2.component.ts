@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ApiKey } from './../model';
-import { apikeyDB } from './../apikey.db';
+import { newsappDB } from './../newsapp.db';
 
 @Component({
   selector: 'app-view2',
@@ -18,7 +18,7 @@ export class View2Component implements OnInit, OnChanges {
   keysaved: boolean = false
 
   // constructor(private fb: FormBuilder, ) { }
-  constructor(private fb: FormBuilder, private qDB: apikeyDB, private router: Router) { }
+  constructor(private fb: FormBuilder, private qDB: newsappDB, private router: Router) { }
 
   ngOnInit(): void {
     this.qDB.getApiKey(this.NEWS_API)
@@ -26,8 +26,8 @@ export class View2Component implements OnInit, OnChanges {
         this.apiKey = res
         if (!!res) {
           this.keysaved = true
-          console.info('retrieve    ', res)
-          console.info('keysaved:   ', this.keysaved)
+          // console.info('retrieve    ', res)
+          // console.info('keysaved:   ', this.keysaved)
           this.form = this.createApi(res)
         } else {
           this.keysaved = false
@@ -35,7 +35,7 @@ export class View2Component implements OnInit, OnChanges {
         }
       })
 
-    console.info("I am here")
+    // console.info("I am here")
     // // retrieve apikey from database for user to delete
     // this.qDB.getApiKey()
     //   .then(res => {
