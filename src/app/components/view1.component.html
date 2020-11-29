@@ -1,20 +1,39 @@
-<div class="row mt-3">
+<div class="row mt-3 mb-3">
     <div class="col d-flex justify-content-between align-items-center">
         <h5>Countries</h5>
 
         <button type="button" class="btn btn-info btn-sm" [routerLink]="['/view2']">
             Setting
         </button>
-        
+
     </div>
 </div>
 <!-- <p *ngIf="!emptylist">click on the list below for the search details</p>
 <p *ngIf="emptylist">click on Search button to start</p> -->
 <!-- <p>{{!emptylist ? "click on the list below for the search details" : "click on Search button to start" }} </p> -->
-<ul class="list-group mt-3">
-    <a *ngFor="let s of resultList"
-        [routerLink]="['/view3', s.code, s.country]"
-        class="list-group-item list-group-item-action"
-    >{{ s.country }} &nbsp;&nbsp;&nbsp;&nbsp; <img [src]="s.flag" style="width: 30px;" alt="">
+
+<!-- <ul class="list-group mt-3">
+    <a *ngFor="let s of resultList" [routerLink]="['/view3', s.code, s.country]"
+        class="list-group-item list-group-item-action">{{ s.country }} &nbsp;&nbsp;&nbsp;&nbsp; <img [src]="s.flag"
+            style="width: 30px;" alt="">
     </a>
-</ul>
+</ul> -->
+
+<div class="row">
+    <div class="col">
+        <div class="list-group">
+            <a *ngFor="let s of resultList" [routerLink]="['/view3', s.code, s.country]"
+                class="list-group-item list-group-item-action">
+                <div class="row d-flex align-content-around">
+                    <div class="col-10">
+                        <span class="country-name">{{ s.country }}</span>
+                    </div>
+                    <div class="col-2">
+                        <img [src]="s.flag" class="rounded flag" alt="">
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+ &nbsp;&nbsp;&nbsp;&nbsp; 
