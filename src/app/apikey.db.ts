@@ -8,7 +8,7 @@ import { ApiKey, CountryList, NewsArticle } from './model';
 export class apikeyDB extends Dexie {
 
     private apiKey: Dexie.Table<ApiKey, string>
-    private country: Dexie.Table<CountryList, string>
+    private countries: Dexie.Table<CountryList, string>
     private news: Dexie.Table<NewsArticle, string>
 
     constructor() {
@@ -16,36 +16,37 @@ export class apikeyDB extends Dexie {
         super('APIKEY')
 
         this.version(1).stores({
-            apiKey: '++id, apiKey'
-        })
-
-        this.version(1).stores({
-            country: 'id, country, flag'
-        })
-
-        this.version(1).stores({
-            news: 'id, title, link'
+            apiKey: 'id',
+            countries: 'code',
+            news: 'pubTime, code'
         })
 
         this.apiKey = this.table('apiKey')
-        this.country = this.table('country')
+        this.countries = this.table('countries')
         this.news = this.table('news')
     }
 
-    async saveApi(key: ApiKey): Promise<any> {
-        console.info('in DB  :',key)
-        return await this.apiKey.add(key)
+    saveApi(id: string, apikey: string): Promise<any> {
+        console.info('in DB  :', apikey)
+        return this.apiKey.add( {id, apikey} )
     }
 
+    getApiKey(id: string): Promise<string> {
+        return this.apiKey.get(id).then(r => {
+            if (!!r)
+                return r.apikey
+            return ''
+        })
+    }
     // async getApiKey(key: number): Promise<ApiKey> {
     //     return await this.apiKey.get(key)
     // }
 
-    async deleteApiKey(): Promise<any> {
-        return await this.apiKey.clear()
+    deleteApiKey(id: string): Promise<void> {
+        return this.apiKey.delete(id)
     }
 
-    async checkContent(): Promise<any> {
+    checkContent(): Promise<any> {
         // const have = await this.apiKey.count()
         // if (have > 0) {
         //     console.info('count > 0')
@@ -54,7 +55,7 @@ export class apikeyDB extends Dexie {
         //     console.info('count < 0')
         //     return ('no')
         // }
-        return await this.apiKey.count()
+        return this.apiKey.count()
     }
 
 }

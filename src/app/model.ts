@@ -1,23 +1,23 @@
 export interface ApiKey {
-    id?: number
+    id?: string
     apikey: string;
 }
 
 export interface CountryList {
-    country: string;
     code: string;
+    country: string;
     flag: string;
 }
 
 export interface NewsArticle {
-    id?: number;
+    pubTime: Date;
+    code: string;
     source: string;
     author: string;
     title: string;
     description: string;
     url: string;
     image: string;
-    pubTime: Date;
     content: string;
     cacheTime?:  Date;
     saved?: boolean;

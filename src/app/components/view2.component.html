@@ -9,12 +9,12 @@
 
     <div class="row mt-3 mb-3">
         <div class="col d-flex justify-content-start align-items-center">
-            <button type="button" class="btn btn-info btn-sm" [routerLink]="['/view1']">Back</button>
+            <button *ngIf="keysaved"  type="button" class="btn btn-info btn-sm" [routerLink]="['/view1']">Back</button>
         </div>
         <div class="col d-flex justify-content-end align-items-center">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-success" [disabled]="form.invalid" (click)="delkey()">Delete</button>
-                <button type="button" class="btn btn-danger" [disabled]="form.invalid"
+                <button type="button" class="btn btn-success" [disabled]="form.invalid" (click)="delkey()">{{ keysaved ? "Delete" : "Clear" }}</button>
+                <button *ngIf="!keysaved" type="button" class="btn btn-danger" [disabled]="form.invalid"
                     (click)="addkey()">Add</button>
             </div>
 
